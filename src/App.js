@@ -1,26 +1,28 @@
-import logo from "./logo.svg";
-import "./App.css";
-import SignUp from "./component/SignUp";
-import Login from "./component/Login";
-import { StreamChat } from "Stream-chat";
-import Cookies from "universal-cookie";
+import React from "react";
+import { BrowserRouter, Route, Routes } from "react-router-dom";
+import Footer from "./component/Footer";
+import Nav from "./component/Nav";
+import SignUp from "./component/SignUp"
 
-function App() {
-  const api_key = "2tm3t5saw5uh";
-  const cookies = new Cookies();
-  const token = cookies.get("token");
-  const client = StreamChat.getInstance();
-
-  if (token) {
-    client.connectUser()
-  }
-
+const App = () => {
   return (
-    <div className="App">
-      <SignUp />
-      <Login />
-    </div>
+    <>
+      <div>
+        <BrowserRouter>
+          <Nav />
+
+          <Routes>
+            <Route path="/" element={""} />
+            <Route path="/add" element={""} />
+            <Route path="/update" element={""} />
+            <Route path="/logout" element={""} />
+            <Route path="/signup" element={<SignUp />} />
+          </Routes>
+        </BrowserRouter>
+        <Footer />
+      </div>
+    </>
   );
-}
+};
 
 export default App;
