@@ -9,7 +9,7 @@ const App = () => {
   return (
     <div>
       <BrowserRouter>
-<Nav />
+        <Nav />
         <Routes>
           <Route element={<PrivateComponent />}>
             <Route exact path="/" element={""} />
