@@ -5,6 +5,7 @@ import Nav from "./component/Nav";
 import SignUp from "./component/SignUp";
 import PrivateComponent from "./component/PrivateComponent";
 import Login from "./component/Login";
+import AddProduct from "./component/addProduct";
 
 const App = () => {
     return (
@@ -19,6 +20,8 @@ const App = () => {
                         <Route path="/update" element={""}/>
                         <Route path="/logout" element={""}/>
                         <Route path="/profile" element={""}/>
+                        <Route path="/add-product" element={<AddProduct />}/>
+
                     </Route>
                     <Route path="/signup" element={<SignUp/>}/>
                     <Route path="/login" element={<Login/>}/>
