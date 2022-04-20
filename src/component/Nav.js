@@ -16,10 +16,7 @@ const Nav = () => {
         {/* anchor tag refreshes the pages, instead use react router*/}
         <ul>
             <li>
-                <Link to="/home"> Home </Link>
-            </li>
-            <li>
-                <Link to="/add"> AddItem </Link>
+                <Link to="/"> Home </Link>
             </li>
             <li>
                 <Link to="/update"> updateitem </Link>

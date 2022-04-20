@@ -16,12 +16,10 @@ const App = () => {
                 <Routes>
                     <Route element={<PrivateComponent/>}>
                         <Route exact path="/" element={<ProductList />}/>
-                        <Route path="/home" element={<h1>Home, sweet home</h1>}/>
-                        <Route path="/add" element={<h1>welcome to add</h1>}/>
+                        <Route path="/add-product" element={<AddProduct />}/>
                         <Route path="/update" element={""}/>
                         <Route path="/logout" element={""}/>
                         <Route path="/profile" element={""}/>
-                        <Route path="/add-product" element={<AddProduct />}/>
 
                     </Route>
                     <Route path="/signup" element={<SignUp/>}/>

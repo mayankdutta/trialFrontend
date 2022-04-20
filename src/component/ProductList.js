@@ -19,31 +19,50 @@ const ProductList = () => {
         setProducts(result);
         console.log(products);
     }
-    return (<>
+    const deleteProduct = async (id) => {
+        let result = await fetch(`http://localhost:5000/products/${id}/`, {
+            method: "Delete"
+        });
 
-        <table>
-            <tr>
-                <td style={borders}>S no.</td>
-                <td style={borders}>Name</td>
-                <td style={borders}>Price</td>
-                <td style={borders}>company</td>
-                <td style={borders}>Category</td>
-            </tr>
+        result = await result.json();
+        (result) ?
+            await getProducts() :
+            alert("some error is there, couldn't delete")
+    }
+    return (
+        <>
+            <h1> Table </h1>
             {
-                products.map((item, index) => {
-                    return (
-                        <tr style={{border: "black solid 2px"}}>
-                            <td style={borders}>{index + 1}</td>
-                            <td style={borders}>{item.name}</td>
-                            <td style={borders}>{item.price}</td>
-                            <td style={borders}>{item.company}</td>
-                            <td style={borders}>{item.category}</td>
-                        </tr>
-                    )
-                })
+                products.length > 0 && (
+                    <table>
+                        <tbody>
+                            <td style={borders}>S no.</td>
+                            <td style={borders}>Name</td>
+                            <td style={borders}>Price</td>
+                            <td style={borders}>company</td>
+                            <td style={borders}>Category</td>
+                            <td style={borders}>operation</td>
+                        </tbody>
+                        {
+                            products.map((item, index) => {
+                                return (
+                                    <tr style={{border: "black solid 2px"}}>
+                                        <td style={borders}>{index + 1}</td>
+                                        <td style={borders}>{item.name}</td>
+                                        <td style={borders}>{item.price}</td>
+                                        <td style={borders}>{item.company}</td>
+                                        <td style={borders}>{item.category}</td>
+                                        <td>
+                                            <button onClick={() => deleteProduct(item._id)}>X</button>
+                                        </td>
+                                    </tr>
+                                )
+                            })
+                        }
+                    </table>
+                )
             }
-        </table>
-    </>)
+        </>)
 }
 
 export default ProductList;
