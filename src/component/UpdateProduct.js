@@ -1,4 +1,6 @@
 import React, { useState } from "react";
+import { useParams } from "react-router-dom";
+import { useEffect } from "react";
 
 const UpdateProduct = () => {
   const [name, setName] = useState("");
@@ -7,7 +9,31 @@ const UpdateProduct = () => {
   const [company, setCompany] = useState("");
   // user id is for so that we can direct which user choose to register for this product
 
-  const handleClick = async () => {};
+  // to get the user id from the url
+  const params = useParams();
+
+  useEffect(() => {
+    getProductDetail();
+  }, []);
+
+  const getProductDetail = async () => {
+    let result = await fetch(`http://localhost:5000/products/${params.id}`);
+    result = await result.json();
+    console.warn(result);
+    setName(result.name);
+    setCategory(result.category);
+    setCompany(result.company);
+    setPrice(result.price);
+  };
+
+  const handleClick = async () => {
+    const userId = JSON.parse(localStorage.getItem("use"))._id;
+
+    if (!name || !category || !price || !company) {
+    }
+
+    // let result = await fetch("http://localhost:5000/update");
+  };
   return (
     <>
       <input
