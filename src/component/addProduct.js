@@ -1,4 +1,5 @@
 import React, {useState} from "react";
+import {useNavigate} from "react-router-dom";
 
 // "name": "a",
 //     "price": "100",
@@ -14,6 +15,7 @@ const AddProduct = () => {
     const [error, setError] = useState(false)
     // user id is for so that we can direct which user choose to register for this product
 
+    const navigate = useNavigate();
     const handleClick = async () => {
         // parse to convert data string -> JSON
         const userId = JSON.parse(localStorage.getItem("user"))._id;
@@ -24,23 +26,17 @@ const AddProduct = () => {
             return;
         }
         let result = await fetch("http://localhost:5000/add-product/", {
-            method: "post",
-            body: JSON.stringify({
-                name,
-                category,
-                price,
-                userId,
-                company
-            }),
-            headers: {
+            method: "post", body: JSON.stringify({
+                name, category, price, userId, company
+            }), headers: {
                 "Content-Type": "application/json",
             },
         });
         result = await result.json();
         console.log(result);
+        navigate("/");
     };
-    return (
-        <>
+    return (<>
             <input
                 type="text"
                 placeholder={"Enter product name"}
@@ -49,9 +45,7 @@ const AddProduct = () => {
                     setName(e.target.value);
                 }}
             />
-            {
-                error && !name && (<p style={{color: "red"}}> Enter valid name</p>)
-            }
+            {error && !name && (<p style={{color: "red"}}> Enter valid name</p>)}
             <input
                 type="text"
                 placeholder={"Enter Price"}
@@ -60,9 +54,7 @@ const AddProduct = () => {
                     setPrice(e.target.value);
                 }}
             />
-            {
-                error && !price && (<p style={{color: "red"}}> Enter valid price</p>)
-            }
+            {error && !price && (<p style={{color: "red"}}> Enter valid price</p>)}
             <input
                 type="text"
                 placeholder={"Enter Category"}
@@ -71,9 +63,7 @@ const AddProduct = () => {
                     setCategory(e.target.value);
                 }}
             />
-            {
-                error && !category && (<p style={{color: "red"}}> Enter valid category</p>)
-            }
+            {error && !category && (<p style={{color: "red"}}> Enter valid category</p>)}
             <input
                 type="text"
                 placeholder={"company"}
@@ -82,12 +72,9 @@ const AddProduct = () => {
                     setCompany(e.target.value);
                 }}
             />
-            {
-                error && !company && (<p style={{color: "red"}}> Enter valid company</p>)
-            }
+            {error && !company && (<p style={{color: "red"}}> Enter valid company</p>)}
             <button onClick={handleClick}>Add product</button>
-        </>
-    );
+        </>);
 };
 
 export default AddProduct;
