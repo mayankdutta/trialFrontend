@@ -24,9 +24,13 @@ const Login = () => {
 
         result = await result.json();
 
-        if (result.name) {
+        // earlier it was result.user user moved inside after applying jwt.
+        if (result.auth) {
             // we can't store json in local storage;
-            localStorage.setItem("user", JSON.stringify(result))
+            localStorage.setItem("user", JSON.stringify(result.user))
+
+            // we also need to set token in the localstorage of user.
+            localStorage.setItem("user", JSON.stringify(result.token))
             navigate("/");
 
         } else {
