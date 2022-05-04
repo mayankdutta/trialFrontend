@@ -15,7 +15,14 @@ const ProductList = () => {
     }, []);
 
     const getProducts = async () => {
-        let result = await fetch("http://localhost:5000/products/");
+        let result = await fetch("http://localhost:5000/products/", {
+            /*
+            headers: {
+                // we want our token to send in this api, thats why used an INTERCEPTER
+                authorization: JSON.parse(localStorage.getItem('token'))
+            }
+            */
+        });
         result = await result.json();
         setProducts(result);
         console.log(products);
@@ -78,5 +85,10 @@ const ProductList = () => {
         }
     </>);
 };
+
+function verifyToken(req, res, next) {
+    console.warn("middleware called")
+
+}
 
 export default ProductList;
