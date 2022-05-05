@@ -30,7 +30,7 @@ const Login = () => {
             localStorage.setItem("user", JSON.stringify(result.user))
 
             // we also need to set token in the localstorage of user.
-            localStorage.setItem("user", JSON.stringify(result.token))
+            localStorage.setItem("token", JSON.stringify(result.token))
             navigate("/");
 
         } else {

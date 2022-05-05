@@ -19,7 +19,14 @@ const UpdateProduct = () => {
     }, []);
 
     const getProductDetail = async () => {
-        let result = await fetch(`http://localhost:5000/products/${params.id}`);
+        let result = await fetch(`http://localhost:5000/products/${params.id}`,
+            {
+                headers: {
+                    // using intercpeter we can send authorization in all of our api, at once.
+                    // but we wont' be using it, we will be sending it manually.
+                    authorization: JSON.parse(localStorage.getItem('token'))
+                }
+            });
         result = await result.json();
         console.warn(result);
         setName(result.name);
@@ -34,7 +41,8 @@ const UpdateProduct = () => {
 
         let result = await fetch(`http://localhost:5000/products/${params.id}`, {
             method: 'Put', body: JSON.stringify({name, price, category, company}), headers: {
-                'Content-Type': "application/json"
+                'Content-Type': "application/json",
+                authorization: JSON.parse(localStorage.getItem('token'))
             }
         })
 

@@ -30,6 +30,7 @@ const AddProduct = () => {
                 name, category, price, userId, company
             }), headers: {
                 "Content-Type": "application/json",
+                authorization: JSON.parse(localStorage.getItem('token'))
             },
         });
         result = await result.json();
@@ -37,44 +38,44 @@ const AddProduct = () => {
         navigate("/");
     };
     return (<>
-            <input
-                type="text"
-                placeholder={"Enter product name"}
-                value={name}
-                onChange={(e) => {
-                    setName(e.target.value);
-                }}
-            />
-            {error && !name && (<p style={{color: "red"}}> Enter valid name</p>)}
-            <input
-                type="text"
-                placeholder={"Enter Price"}
-                value={price}
-                onChange={(e) => {
-                    setPrice(e.target.value);
-                }}
-            />
-            {error && !price && (<p style={{color: "red"}}> Enter valid price</p>)}
-            <input
-                type="text"
-                placeholder={"Enter Category"}
-                value={category}
-                onChange={(e) => {
-                    setCategory(e.target.value);
-                }}
-            />
-            {error && !category && (<p style={{color: "red"}}> Enter valid category</p>)}
-            <input
-                type="text"
-                placeholder={"company"}
-                value={company}
-                onChange={(e) => {
-                    setCompany(e.target.value);
-                }}
-            />
-            {error && !company && (<p style={{color: "red"}}> Enter valid company</p>)}
-            <button onClick={handleClick}>Add product</button>
-        </>);
+        <input
+            type="text"
+            placeholder={"Enter product name"}
+            value={name}
+            onChange={(e) => {
+                setName(e.target.value);
+            }}
+        />
+        {error && !name && (<p style={{color: "red"}}> Enter valid name</p>)}
+        <input
+            type="text"
+            placeholder={"Enter Price"}
+            value={price}
+            onChange={(e) => {
+                setPrice(e.target.value);
+            }}
+        />
+        {error && !price && (<p style={{color: "red"}}> Enter valid price</p>)}
+        <input
+            type="text"
+            placeholder={"Enter Category"}
+            value={category}
+            onChange={(e) => {
+                setCategory(e.target.value);
+            }}
+        />
+        {error && !category && (<p style={{color: "red"}}> Enter valid category</p>)}
+        <input
+            type="text"
+            placeholder={"company"}
+            value={company}
+            onChange={(e) => {
+                setCompany(e.target.value);
+            }}
+        />
+        {error && !company && (<p style={{color: "red"}}> Enter valid company</p>)}
+        <button onClick={handleClick}>Add product</button>
+    </>);
 };
 
 export default AddProduct;
